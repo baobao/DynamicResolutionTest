@@ -30,6 +30,9 @@ public class DynamicResolutionTest : MonoBehaviour
 
         _renderTexture = new RenderTexture(300, 300, 24);
 
+        // デフォルトでダイナミックスケールON
+        _renderTexture.useDynamicScale = true;
+
         _previewRenderTexture.texture = _renderTexture;
     }
 
