@@ -28,7 +28,7 @@ public class DynamicResolutionTest : MonoBehaviour
     {
         _camera = Camera.main;
 
-        _renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        _renderTexture = new RenderTexture(300, 300, 24);
 
         _previewRenderTexture.texture = _renderTexture;
     }
