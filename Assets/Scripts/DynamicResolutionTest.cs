@@ -70,20 +70,31 @@ public class DynamicResolutionTest : MonoBehaviour
 
     void OnGUI()
     {
-        float buttonW = 200f;
-        float buttonH = 60f;
+        float buttonW = 300f;
+        float buttonH = 100f;
+
+        if (GUILayout.Button("W0.1 : H0.1", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
+        {
+            ResizeBuffers(0.1f);
+        }
+
+        if (GUILayout.Button("W0.5 : H0.5", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
+        {
+            ResizeBuffers(0.5f);
+        }
+
+        if (GUILayout.Button("W1.0 : H1.0", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
+        {
+            ResizeBuffers(1.0f);
+        }
+
+
         if (GUILayout.Button("Blit", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
         {
             Blit();
         }
 
-        if (GUILayout.Button("Screen.SetResolution", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
-        {
-            int w = Screen.width / 10;
-            int h = Screen.height / 10;
-            Screen.SetResolution(w, h, FullScreenMode.ExclusiveFullScreen);
-        }
-
+        /*
         if (GUILayout.Button("RT Toggle : " + _renderTexture.useDynamicScale, GUILayout.Width(buttonW),
             GUILayout.Height(buttonH)))
         {
@@ -97,28 +108,6 @@ public class DynamicResolutionTest : MonoBehaviour
             // CameraのDynamicResolution切り替え
             _camera.allowDynamicResolution = _camera.allowDynamicResolution == false;
         }
-
-        if (GUILayout.Button("W1.0 : H1.0", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
-        {
-            ScalableBufferManager.ResizeBuffers(1.0f, 1.0f);
-        }
-
-        if (GUILayout.Button("W0.5 : H0.5", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
-        {
-            ScalableBufferManager.ResizeBuffers(0.5f, 0.5f);
-        }
-
-        if (GUILayout.Button("W0.1 : H0.1", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
-        {
-            ScalableBufferManager.ResizeBuffers(0.1f, 0.1f);
-        }
-
-        if (GUILayout.Button(" Reset W1.0 : H0.3", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
-        {
-            // 縦横比を崩してみる
-            ScalableBufferManager.ResizeBuffers(1.0f, 0.3f);
-        }
-
 
         if (GUILayout.Button("Blit FrameBuffer", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
         {
@@ -137,5 +126,20 @@ public class DynamicResolutionTest : MonoBehaviour
             // targetTextureにnull突っ込むとSclableBufferが使えなくなる
             _camera.targetTexture = null;
         }
+
+        if (GUILayout.Button("Screen.SetResolution", GUILayout.Width(buttonW), GUILayout.Height(buttonH)))
+        {
+            int w = Screen.width / 10;
+            int h = Screen.height / 10;
+            Screen.SetResolution(w, h, FullScreenMode.ExclusiveFullScreen);
+        }
+        */
+    }
+
+    // ResizeBufferしてRenderTextureの更新
+    void ResizeBuffers(float scale)
+    {
+        ScalableBufferManager.ResizeBuffers(scale, scale);
+        Blit();
     }
 }
